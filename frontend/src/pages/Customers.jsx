@@ -36,6 +36,10 @@ const CustomerTable = () => {
     })
 
     console.log("test", tableInstance.getHeaderGroups())
+    const timeOutFucntion = () =>{
+        setLoading(false)
+    }
+    setTimeout(timeOutFucntion, 2000)
 
     return (
         <>
