@@ -37,7 +37,7 @@ const Vendors = () => {
 
     return (
         <Container maxW={'100vw'} width={'100%'} height={'100vh'} >
-<Text fontSize={'2xl'} textAlign={'center'} >Vendors</Text>
+            <Text fontSize={'2xl'} textAlign={'center'} fontFamily={'myfont'} >Vendors</Text>
             <TableContainer p={10} ml={'30px'}  >
                 <Table variant='striped' colorScheme='gray' >
                     <TableCaption>Vendors Data</TableCaption>
@@ -172,7 +172,7 @@ const Vendors = () => {
 
                 </div>
 
-  
+
             </TableContainer>
 
         </Container>

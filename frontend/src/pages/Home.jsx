@@ -3,7 +3,7 @@ import { Box, HStack, Image, Text, VStack } from '@chakra-ui/react';
 import img from '../assets/image.png';
 
 const Home = () => {
-    return (
+        return (
         <HStack spacing={8} alignItems="center" justifyContent={'center'}>
             <VStack>
             <Text fontSize="4xl" fontFamily={'myfont'} fontWeight="bold" textAlign="center">Inventory Management System</Text>

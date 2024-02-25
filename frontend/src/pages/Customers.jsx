@@ -18,7 +18,7 @@ import {
     Center,
 } from '@chakra-ui/react'
 const CustomerTable = () => {
-const [loading, setLoading] = React.useState(false)
+        const [loading, setLoading] = React.useState(false)
     const finalData = React.useMemo(() => {
         customersData
     }, [])
@@ -38,165 +38,165 @@ const [loading, setLoading] = React.useState(false)
     console.log("test", tableInstance.getHeaderGroups())
 
     return (
-<>
+        <>
 
-{
-    loading ? (<Center h={'80vh'} >
-    <Spinner
-      thickness='4px'
-      speed='0.65s'
-      emptyColor='gray.200'
-      color='blue.500'
-      size='xl'
-    />
-        
-    </Center>   )  : (
-        <Container maxW={'100vw'} width={'100%'} height={'100vh'} >
-            <Text fontSize={'2xl'} textAlign={'center'} >Customers</Text>
-            <TableContainer p={10} ml={'30px'}  >
-                <Table variant='striped' colorScheme='gray' >
-                    <TableCaption>Customer Data</TableCaption>
+            {
+                loading ? (<Center h={'80vh'} >
+                    <Spinner
+                        thickness='4px'
+                        speed='0.65s'
+                        emptyColor='gray.200'
+                        color='blue.500'
+                        size='xl'
+                    />
 
-                    <Thead backgroundColor={'#67f0b7'}  >
-                        {
-                            tableInstance.getHeaderGroups().map((headerEl) => {
-                                return <Tr key={headerEl.id} >
+                </Center>) : (
+                    <Container maxW={'100vw'} width={'100%'} height={'100vh'} >
+                        <Text fontSize={'2xl'} fontFamily={'myfont'} textAlign={'center'} >Sales Invoices</Text>
+                        <TableContainer p={10} ml={'30px'}  >
+                            <Table variant='striped' colorScheme='gray' >
+                                <TableCaption>Customer Data</TableCaption>
+
+                                <Thead backgroundColor={'#67f0b7'}  >
                                     {
-                                        headerEl.headers.map((columnEl) => {
-                                            return <Th key={columnEl.id} color={'black'} colSpan={columnEl.colSpan} >
+                                        tableInstance.getHeaderGroups().map((headerEl) => {
+                                            return <Tr key={headerEl.id} >
                                                 {
-                                                    flexRender(
-                                                        columnEl.column.columnDef.header,
-                                                        columnEl.getContext()
-                                                    )
+                                                    headerEl.headers.map((columnEl) => {
+                                                        return <Th key={columnEl.id} color={'black'} colSpan={columnEl.colSpan} >
+                                                            {
+                                                                flexRender(
+                                                                    columnEl.column.columnDef.header,
+                                                                    columnEl.getContext()
+                                                                )
+                                                            }
+                                                        </Th>
+                                                    })
                                                 }
-                                            </Th>
+                                            </Tr>
                                         })
                                     }
-                                </Tr>
-                            })
-                        }
-                    </Thead>
+                                </Thead>
 
-                    <Tbody>
-                        {
-                            tableInstance.getRowModel().rows.map((rowEl) => {
-                                return <Tr key={rowEl.id} >
+                                <Tbody>
                                     {
-                                        rowEl.getVisibleCells().map((cellEl) => {
-                                            return <Td key={cellEl.id}>
+                                        tableInstance.getRowModel().rows.map((rowEl) => {
+                                            return <Tr key={rowEl.id} >
                                                 {
-                                                    flexRender(cellEl.column.columnDef.cell, cellEl.getContext())
+                                                    rowEl.getVisibleCells().map((cellEl) => {
+                                                        return <Td key={cellEl.id}>
+                                                            {
+                                                                flexRender(cellEl.column.columnDef.cell, cellEl.getContext())
+                                                            }
+                                                        </Td>
+                                                    })
                                                 }
-                                            </Td>
+                                            </Tr>
                                         })
                                     }
-                                </Tr>
-                            })
-                        }
-                    </Tbody>
-                </Table>
-                <div className="h-2" />
+                                </Tbody>
+                            </Table>
+                            <div className="h-2" />
 
-                <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-2">
 
-                    <button
-                        className="border rounded p-1"
-                        onClick={() => tableInstance.setPageIndex(0)}
-                        disabled={!tableInstance.getCanPreviousPage()}
-                    >
-                        {'<<'}
-                    </button>
+                                <button
+                                    className="border rounded p-1"
+                                    onClick={() => tableInstance.setPageIndex(0)}
+                                    disabled={!tableInstance.getCanPreviousPage()}
+                                >
+                                    {'<<'}
+                                </button>
 
 
 
-                    <button
-                        className="border rounded p-1"
-                        onClick={() => tableInstance.previousPage()}
-                        disabled={!tableInstance.getCanPreviousPage()}
-                    >
-                        {'<'}
-                    </button>
+                                <button
+                                    className="border rounded p-1"
+                                    onClick={() => tableInstance.previousPage()}
+                                    disabled={!tableInstance.getCanPreviousPage()}
+                                >
+                                    {'<'}
+                                </button>
 
 
-                    <button
-                        className="border rounded p-1"
-                        onClick={() => tableInstance.nextPage()}
-                        disabled={!tableInstance.getCanNextPage()}
-                    >
-                        {'>'}
-                    </button>
+                                <button
+                                    className="border rounded p-1"
+                                    onClick={() => tableInstance.nextPage()}
+                                    disabled={!tableInstance.getCanNextPage()}
+                                >
+                                    {'>'}
+                                </button>
 
 
 
-                    <button
-                        className="border rounded p-1"
-                        onClick={() => tableInstance.setPageIndex(tableInstance.getPageCount() - 1)}
-                        disabled={!tableInstance.getCanNextPage()}
-                    >
-                        {'>>'}
-                    </button>
+                                <button
+                                    className="border rounded p-1"
+                                    onClick={() => tableInstance.setPageIndex(tableInstance.getPageCount() - 1)}
+                                    disabled={!tableInstance.getCanNextPage()}
+                                >
+                                    {'>>'}
+                                </button>
 
 
 
 
 
 
-                    <span className="flex items-center gap-1">
-                        <div>Page</div>
-                        <strong>
-                            {tableInstance.getState().pagination.pageIndex + 1} of{' '}
-                            {tableInstance.getPageCount()}
-                        </strong>
-                    </span>
+                                <span className="flex items-center gap-1">
+                                    <div>Page</div>
+                                    <strong>
+                                        {tableInstance.getState().pagination.pageIndex + 1} of{' '}
+                                        {tableInstance.getPageCount()}
+                                    </strong>
+                                </span>
 
 
 
 
-                    <span className="flex items-center gap-1">
-                        | Go to page:
-                        <input
-                            type="number"
-                            defaultValue={tableInstance.getState().pagination.pageIndex + 1}
-                            onChange={e => {
-                                const page = e.target.value ? Number(e.target.value) - 1 : 0
-                                tableInstance.setPageIndex(page)
-                            }}
-                            className="border p-1 rounded w-16"
-                        />
-                    </span>
+                                <span className="flex items-center gap-1">
+                                    | Go to page:
+                                    <input
+                                        type="number"
+                                        defaultValue={tableInstance.getState().pagination.pageIndex + 1}
+                                        onChange={e => {
+                                            const page = e.target.value ? Number(e.target.value) - 1 : 0
+                                            tableInstance.setPageIndex(page)
+                                        }}
+                                        className="border p-1 rounded w-16"
+                                    />
+                                </span>
 
 
 
 
-                    <select
-                        value={tableInstance.getState().pagination.pageSize}
-                        onChange={e => {
-                            tableInstance.setPageSize(Number(e.target.value))
-                        }}
-                    >
-                        {[10, 20, 30, 40, 50].map(pageSize => (
-                            <option key={pageSize} value={pageSize}>
-                                Show {pageSize}
-                            </option>
-                        ))}
-                    </select>
+                                <select
+                                    value={tableInstance.getState().pagination.pageSize}
+                                    onChange={e => {
+                                        tableInstance.setPageSize(Number(e.target.value))
+                                    }}
+                                >
+                                    {[10, 20, 30, 40, 50].map(pageSize => (
+                                        <option key={pageSize} value={pageSize}>
+                                            Show {pageSize}
+                                        </option>
+                                    ))}
+                                </select>
 
 
 
 
-                </div>
+                            </div>
 
 
-            </TableContainer>
+                        </TableContainer>
 
-        </Container>
-    )
-}
-</>
+                    </Container>
+                )
+            }
+        </>
 
 
-        
+
     )
 }
 
