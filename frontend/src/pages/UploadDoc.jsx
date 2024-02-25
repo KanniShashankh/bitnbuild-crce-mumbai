@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, Center, HStack, Input, Text, Textarea, VStack, useDisclosure } from '@chakra-ui/react';
 import axios from 'axios';
 import { FaFileUpload } from 'react-icons/fa';
@@ -17,11 +17,16 @@ import {
 
 const FileUploadPage = () => {
     const [selectedFile, setSelectedFile] = useState(null);
-    const [showButton, setShowButton] = useState(true)
-    const [resp, setResp] = useState('waiting');
+    const [showButton, setShowButton] = useState(false)
+    const [resp, setResp] = useState('');
     const [loading, setLoading] = useState(false);
     const [searchTerm, setSearchTerm] = useState(""); // State to store input value
 
+    useEffect(() => {
+        if(resp != ""){
+            setShowButton(true)
+        }
+    },[resp])
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -86,8 +91,8 @@ const FileUploadPage = () => {
                 ) : (
                     <Center h="100vh">
                         <VStack>
-                            <VStack spacing={4} p={6} borderWidth="1px" borderRadius="lg" boxShadow="lg">
-                                <Text fontSize="2xl" fontWeight="bold">Document Summarizer</Text>
+                            <VStack spacing={10} p={10} borderWidth="1px" borderRadius="lg" boxShadow="lg">
+                                <Text fontSize="2xl" fontFamily={'myfont'} fontWeight="bold">Document Summarizer</Text>
                                 <Box w="100%" borderStyle="dashed" borderWidth="2px" borderRadius="lg" p={4} borderColor="white" cursor="pointer">
                                     <label htmlFor="file-upload" className="custom-file-upload">
                                         <input id="file-upload" type="file" onChange={handleFileChange} hidden />

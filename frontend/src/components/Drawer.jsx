@@ -45,7 +45,6 @@ function DrawerExample() {
                     <HStack><MdOutlineInventory2/> <Text>Inventory</Text>
                     </HStack>
                     </DrawerHeader>
-
                     <DrawerBody>
                         {
                             <Stack>
