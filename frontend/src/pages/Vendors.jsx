@@ -56,7 +56,7 @@ const Vendors = () => {
 
                 </Center>) : (
                     <Container maxW={'100vw'} width={'100%'} height={'100vh'} >
-                        <Text fontSize={'2xl'} textAlign={'center'} >Vendors</Text>
+                        <Text fontFamily={'myfont'} fontSize={'2xl'} textAlign={'center'} >Vendors</Text>
                         <TableContainer p={10} ml={'30px'}  >
                             <Table variant='striped' colorScheme='gray' >
                                 <TableCaption>Vendors Data</TableCaption>
