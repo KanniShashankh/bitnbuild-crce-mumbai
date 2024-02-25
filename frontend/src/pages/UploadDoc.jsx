@@ -70,6 +70,8 @@ const FileUploadPage = () => {
         // Perform API request with the search term
     };
 
+    
+
     return (
         <>
             {

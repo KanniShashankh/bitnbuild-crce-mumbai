@@ -52,7 +52,11 @@ const Dashboard = () => {
     ];
 
 
-const [loading, setLoading] = useState(false)
+const [loading, setLoading] = useState(true)
+const timeOutFucntion = () =>{
+    setLoading(false)
+}
+setTimeout(timeOutFucntion, 500)
     const productDetails = [
         {
             quant: 22,

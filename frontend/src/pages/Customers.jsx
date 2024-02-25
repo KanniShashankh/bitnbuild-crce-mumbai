@@ -18,7 +18,7 @@ import {
     Center,
 } from '@chakra-ui/react'
 const CustomerTable = () => {
-const [loading, setLoading] = React.useState(false)
+const [loading, setLoading] = React.useState(true)
     const finalData = React.useMemo(() => {
         customersData
     }, [])
@@ -36,6 +36,10 @@ const [loading, setLoading] = React.useState(false)
     })
 
     console.log("test", tableInstance.getHeaderGroups())
+    const timeOutFucntion = () =>{
+        setLoading(false)
+    }
+    setTimeout(timeOutFucntion, 2000)
 
     return (
 <>
