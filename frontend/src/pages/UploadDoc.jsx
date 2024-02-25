@@ -4,7 +4,7 @@ import axios from 'axios';
 import { FaFileUpload } from 'react-icons/fa';
 import { Spinner } from '@chakra-ui/react';
 import { SiOpenai } from "react-icons/si";
-
+import ReactMarkdown from 'react-markdown'
 import {
     Modal,
     ModalOverlay,
@@ -25,6 +25,7 @@ const FileUploadPage = () => {
     useEffect(() => {
         if(resp != ""){
             setShowButton(true)
+            // localStorage.set('company', resp)
         }
     },[resp])
 
@@ -70,9 +71,11 @@ const FileUploadPage = () => {
     }
 
     // Function to handle API request with input value
-    const handleSearch = (value) => {
-        console.log("Search term:", value);
-        // Perform API request with the search term
+    const handleSearch = async (value) => {
+        const prompt = resp + ' The above is the information, you can use it to answer the below question. ' + value;
+        const { data } = await axios.post('http://localhost:5000/query', { text : prompt });
+        console.log(data)
+        return data;
     };
 
     
@@ -111,10 +114,10 @@ const FileUploadPage = () => {
                                 <Button colorScheme="blue" onClick={handleUpload}>Upload</Button>
                             </VStack>
                             <Box w={'100%'} maxWidth={'100%'}>
-                                <Text>{resp}</Text>
+                                <ReactMarkdown>{resp}</ReactMarkdown>
                             </Box>
                             {showButton && (
-                                <HStack w={'fit-content'} css={{
+                                <HStack padding={3} w={'fit-content'} css={{
                                     border: '1px solid teal',
                                 }} onClick={onOpen} _hover={{ bg: "teal.600" }} px={3.5} py={2} borderRadius={4} cursor={'pointer'} >
                                     <Box>Chat</Box>
@@ -138,9 +141,13 @@ const ChatModal = ({ isOpen, onClose, handleSearch, onClick }) => {
     const handleChange = (event) => {
         setInputValue(event.target.value); // Update input value state
     };
+    const [resState, setResState] = useState('')
 
-    const handleSubmit = () => {
-        handleSearch(inputValue); // Call parent function with input value
+
+    const handleSubmit = async () => {
+        setResState('...')
+        const data = await handleSearch(inputValue); // Call parent function with input value
+        setResState(data);
         // Close the modal
     };
 
@@ -149,7 +156,7 @@ const ChatModal = ({ isOpen, onClose, handleSearch, onClick }) => {
             <Modal isOpen={isOpen} onClose={onClose} size="xl">
                 <ModalOverlay />
                 <ModalContent maxW="60vw"> {/* Adjusted modal width */}
-                    <ModalHeader>Chat</ModalHeader>
+                    <ModalHeader>Ask About Anything</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
                         <VStack w={'100%'} spacing={8}  >
@@ -157,14 +164,14 @@ const ChatModal = ({ isOpen, onClose, handleSearch, onClick }) => {
                                 <Input variant='filled' placeholder='Search for anything ' value={inputValue} onChange={handleChange} />
                                 <SiOpenai />
                             </HStack>
-                            <Textarea isInvalid placeholder='Here is a sample placeholder' />
+                            <Textarea value={resState}  readOnly placeholder='Here your responses will be received' />
                         </VStack>
                     </ModalBody>
                     <ModalFooter>
                         <Button colorScheme='blue' mr={3} onClick={handleSubmit}>
-                            Send
+                            Ask
                         </Button>
-                        <Button variant='ghost'>Secondary Action</Button>
+                        {/* <Button onClick={() => } variant='ghost'>Close</Button> */}
                     </ModalFooter>
                 </ModalContent>
             </Modal>

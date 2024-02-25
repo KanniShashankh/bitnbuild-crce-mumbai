@@ -5,8 +5,7 @@ from flask_cors import CORS, cross_origin
 
 CORS(app)
 # gcloud auth print-access-token
-TOKEN = 'ya29.a0AfB_byBy3pwByfKzCuDD0Zs0V9OwPteUgvukZZIslRqmftcTiAotarSEcFOrdLEURoQBcA_SdMc_zDP11pf9mns0P91_X6iniJhFX2lHj4_Kq8xJ3qnXQSoQjuSZ0PLevF3MRLM8Qy1SaG_mJBzI_KY7AMzEbG7UnbFjqENZ0QaCgYKAdwSARASFQHGX2MiustRIxuvFbt_wlbV-GeD9g0177'
-
+TOKEN = 'ya29.a0AfB_byD5Kvz4OVtvNHeAhoO1iAfvibp8Yr5Z42O9tdnAXXSIUqhFMM4fCeNoqSn8NjGNvzGiy1zs4MuYItirZ-_nAUohxgUa7CmEqJ9AQqVGBxW8n7TWW6KgDd58qQxzASu3aJRZT8Uj_lZEWAEb7D_xiTrSR2neANZGGwf3tAwaCgYKAboSARASFQHGX2MiT3gBm-fCu5li9UtZoRMPdg0178'
 @app.route("/")
 def main():
     return "Welcome!"
@@ -158,7 +157,7 @@ def process_document_sample(
 
     
   
-    prompt = "Hello. Summarize the following text for me, in a lengthy explanative fashion. And explaining the key points of the text, Produce the output in markdown fashion so that i can be directly put into a markdown viewer for clear viewing with bullet points. -> " + document.text
+    prompt = "Hello. Summarize the following text for me. And explaining the key points of the text, Produce the output in markdown fashion so that i can be directly put into a markdown viewer for clear viewing with bullet points. -> " + document.text
     # prompt = "write a poem in nicely spaced format with cute emojis"
     import requests
     import json
@@ -182,8 +181,12 @@ def process_document_sample(
     print(response_json)
     l = []
     for i in response_json:
-        # print(i['candidates'])
-        l.append(i['candidates'][0]['content']['parts'][0]['text'])
+        try:
+            # print(i['candidates'][0]['content']['parts'][0]['text'])
+            l.append(i['candidates'][0]['content']['parts'][0]['text'])
+        except:
+            pass
+    # print("here", l)
     return "".join(l)
 
     #file upload data

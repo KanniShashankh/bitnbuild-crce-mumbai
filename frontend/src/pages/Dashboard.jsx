@@ -17,7 +17,7 @@ Chart.defaults.plugins.legend.title.font = 'Helvetica Neue';
 
 const data = {
     labels: [
-        'All',
+        'Shipped',
         'Active',
     ],
     datasets: [{
@@ -62,19 +62,23 @@ setTimeout(timeOutFucntion, 500)
     const productDetails = [
         {
             quant: 22,
-            status: 'Low Stock Items'
+            status: 'Low Stock Items',
+            color: 'red'
         },
         {
             quant: 34,
-            status: 'All Item Groups'
+            status: 'Items to be Shipped',
+            color: 'red'
         },
         {
             quant: 120,
-            status: 'All Items'
+            status: 'All Items',
+            color: 'red'
         },
         {
             quant: 91,
-            status: 'To be invoiced'
+            status: 'To be invoiced',
+            color: 'red'
         },
     ];
     
@@ -220,13 +224,10 @@ setTimeout(timeOutFucntion, 500)
                                             <HStack w={'100%'} >
                                                 <VStack w={'100%'} px={7} justifyContent={'space-between'}  >
                                                     {productDetails.map((item, index) => (
-
                                                         <HStack w={'100%'} justifyContent={'space-between'} key={index} >
                                                             <Text color={textColor[colorMode]} fontSize={'xl'} >{item.status}</Text>
-                                                            <p>11111</p>
+                                                            <p>{Math.round(Math.random()*100)}</p>
                                                         </HStack>
-
-
                                                     ))}
                                                 </VStack>
                                                 <Divider orientation='vertical' height={'150px'} />
