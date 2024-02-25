@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './login.css';
+import { Link } from 'react-router-dom';
 
 function FlipCard() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -37,7 +38,7 @@ function FlipCard() {
               <form className="flip-card__form" action="">
                 <input className="flip-card__input" name="email" placeholder="Email" type="email" />
                 <input className="flip-card__input" name="password" placeholder="Password" type="password" />
-                <button className="flip-card__btn">Let`s go!</button>
+                <Link to={'/'} className="flip-card__btn">Let`s go!</Link>
               </form>
             </div>
             <div className={`flip-card__back ${isSignUp ? '' : 'hidden'}`}>

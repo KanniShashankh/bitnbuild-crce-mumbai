@@ -42,6 +42,7 @@ const Vendors = () => {
     console.log("test", tableInstance.getHeaderGroups())
 
     return (
+
         <>
             {
                 loading ? (<Center h={'80vh'} >
@@ -61,6 +62,7 @@ const Vendors = () => {
                                 <TableCaption>Vendors Data</TableCaption>
 
                                 <Thead backgroundColor={'#67f0b7'}  >
+
                                     {
                                         tableInstance.getHeaderGroups().map((headerEl) => {
                                             return <Tr key={headerEl.id} >
@@ -191,7 +193,9 @@ const Vendors = () => {
                             </div>
 
 
+
                         </TableContainer>
+
 
                     </Container>
                 )
